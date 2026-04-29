@@ -18,7 +18,7 @@ const notoSerifJP = Noto_Serif_JP({
 })
 
 export const metadata: Metadata = {
-  title: '🗾 Tokyo Trip 2027 — 6 วันสองคน',
+  title: 'Tokyo Trip 2027 — 6 วันสองคน',
   description: 'แผนการท่องเที่ยวโตเกียว 6 วันกับแฟน ปลายเดือนมกราคม 2570 ช่วงหิมะตก',
   icons: { icon: '/favicon.ico' },
 }
