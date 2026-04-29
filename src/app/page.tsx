@@ -11,6 +11,8 @@ import type { TripDay, BudgetItem, ChecklistGroup, ChecklistTab } from '@/types'
 
 export const dynamic = 'force-dynamic'
 
+const getCurrentYear = () => new Date().getFullYear()
+
 async function getData() {
   const [days, budget, packGroups, prepGroups, appGroups] = await Promise.all([
     prisma.tripDay.findMany({
@@ -63,8 +65,8 @@ export default async function HomePage() {
         <TipsSection />
       </main>
       <footer className='relative z-10 border-t border-[var(--border)] py-8 text-center text-[var(--text2)] text-sm'>
-        <p className='font-noto mb-1'>東京旅行 2027 — 二人の思い出</p>
         <p>สร้างด้วย ❤️ Next.js 15 + Prisma + PostgreSQL</p>
+        <p>copyright © Thanwa Tbp. {getCurrentYear()}</p>
       </footer>
     </ToastProvider>
   )
