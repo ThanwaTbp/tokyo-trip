@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TripDay {
+  id        String   @id @default(cuid())
+  dayNumber Int      @unique
+  date      String
+  title     String
+  travelMode   String
+  travelTitle  String
+  travelDesc   String
+  travelMapUrl String
+  places    Place[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Place {
+  id       String  @id @default(cuid())
+  name     String
+  desc     String
+  type     PlaceType
+  emoji    String  @default("📍")
+  mapUrl   String
+  imgUrl   String?
+  order    Int     @default(0)
+  day      TripDay @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  dayId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BudgetItem {
+  id      String @id @default(cuid())
+  category String
+  amount  Int
+  maxBudget Int  @default(80000)
+  color   String
+  note    String
+  order   Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ChecklistGroup {
+  id       String         @id @default(cuid())
+  name     String
+  tab      ChecklistTab
+  order    Int            @default(0)
+  items    ChecklistItem[]
+  createdAt DateTime @default(now())
+}
+
+model ChecklistItem {
+  id      String         @id @default(cuid())
+  text    String
+  done    Boolean        @default(false)
+  order   Int            @default(0)
+  group   ChecklistGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PlaceType {
+  sight
+  food
+  exp
+  shop
+  stay
+}
+
+enum ChecklistTab {
+  pack
+  prep
+  app
+}

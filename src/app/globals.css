@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts (loaded via <link> in layout.tsx) ── */
+body {
+  font-family: var(--font-ibm-plex-sans-thai), sans-serif;
+}
+
+.font-noto {
+  font-family: var(--font-noto), serif;
+}
+
+/* ── CSS Variables ── */
+:root {
+  --bg:      #080810;
+  --bg2:     #0f0f1a;
+  --bg3:     #161625;
+  --card:    #12121e;
+  --border:  #252535;
+  --border2: #333348;
+  --text:    #e8e8f2;
+  --text2:   #8888aa;
+  --accent:  #f4a0c0;
+  --accent2: #80b8f0;
+  --accent3: #f0c870;
+  --green:   #68c898;
+  --red:     #f07070;
+}
+
+.light {
+  --bg:      #f0ece6;
+  --bg2:     #e8e2da;
+  --bg3:     #ddd6cc;
+  --card:    #ffffff;
+  --border:  #d0c8bc;
+  --border2: #b8b0a4;
+  --text:    #28201a;
+  --text2:   #60584f;
+  --accent:  #c03060;
+  --accent2: #2060b0;
+  --accent3: #a06800;
+  --green:   #286840;
+  --red:     #b03030;
+}
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mitr), sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Utilities ── */
+.bg-card    { background-color: var(--card); }
+.bg-bg      { background-color: var(--bg); }
+.bg-bg2     { background-color: var(--bg2); }
+.bg-bg3     { background-color: var(--bg3); }
+.border-main { border-color: var(--border); }
+.border-2nd { border-color: var(--border2); }
+.text-main  { color: var(--text); }
+.text-sub   { color: var(--text2); }
+.text-accent { color: var(--accent); }
+.text-accent2 { color: var(--accent2); }
+.text-accent3 { color: var(--accent3); }
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 55%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animations ── */
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+@keyframes toastIn {
+  from { transform: translateX(10px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+.animate-slide-up { animation: slideUp 0.28s ease forwards; }
+.animate-fade-in  { animation: fadeIn 0.3s ease forwards; }
+.animate-bob      { animation: bob 2.2s ease-in-out infinite; }
+.animate-toast    { animation: toastIn 0.25s ease; }
+
+/* ── Input / Select focus ring ── */
+.input-focus:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+.input-error {
+  border-color: var(--red) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--red) 15%, transparent) !important;
+}
