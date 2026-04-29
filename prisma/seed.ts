@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PlaceType, PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -84,7 +84,7 @@ async function main() {
     const { places, ...dayFields } = d
     const day = await prisma.tripDay.create({ data: dayFields })
     for (const p of places) {
-      await prisma.place.create({ data: { ...p, dayId: day.id } })
+      await prisma.place.create({ data: { ...p, dayId: day.id, type: p.type as PlaceType } })
     }
   }
 
